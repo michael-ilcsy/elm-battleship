@@ -3,6 +3,7 @@ module Main exposing (..)
 import Array exposing (Array)
 import Browser
 import Html exposing (Html, div, table, tbody, td, tr)
+import Html.Attributes exposing (class)
 
 
 
@@ -19,6 +20,12 @@ type alias GameBoard =
 
 type GameBoardState
     = Unknown
+    | Sunk SunkType
+
+
+type SunkType
+    = Body
+    | Tip Direction
 
 
 type alias Coordinate =
@@ -30,6 +37,22 @@ type Direction
     | Left
     | Up
     | Down
+
+
+directionToString : Direction -> String
+directionToString direction =
+    case direction of
+        Right ->
+            "right"
+
+        Left ->
+            "left"
+
+        Up ->
+            "up"
+
+        Down ->
+            "down"
 
 
 {-| 船の先端マスを表す型
@@ -105,15 +128,30 @@ viewGameBoard gameBoard =
                     tr [] <|
                         Array.toList <|
                             Array.map
-                                (\square ->
-                                    td [] []
-                                )
+                                viewSquare
                                 row
                 )
                 gameBoard
                 |> Array.toList
             )
         ]
+
+
+viewSquare : GameBoardState -> Html msg
+viewSquare state =
+    td
+        [ class <|
+            case state of
+                Sunk Body ->
+                    "sunk"
+
+                Sunk (Tip direction) ->
+                    "sunk " ++ directionToString direction
+
+                _ ->
+                    ""
+        ]
+        [ div [] [] ]
 
 
 

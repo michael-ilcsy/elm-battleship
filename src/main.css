@@ -20,6 +20,63 @@ td {
     border: 2px solid gray;
     width: 30px;
     height: 30px;
+    position: relative;
+}
+
+td.sunk {
+    background-color: #2bffff;
+}
+
+td.sunk.right, td.sunk.left, td.sunk.up, td.sunk.down {
+    background-color: transparent
+}
+
+td.sunk.right > div {
+    background-color: transparent;
+    box-sizing: border-box;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 16px solid transparent;
+    border-left-color: #2bffff;
+    bottom: 0;
+    left: 0;
+}
+
+td.sunk.left > div {
+    background-color: transparent;
+    box-sizing: border-box;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 16px solid transparent;
+    border-right-color: #2bffff;
+    bottom: 0;
+    left: 0;
+}
+
+td.sunk.up > div {
+    background-color: transparent;
+    box-sizing: border-box;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 16px solid transparent;
+    border-bottom-color: #2bffff;
+    bottom: 0;
+    left: 0;
+}
+
+td.sunk.down > div {
+    background-color: transparent;
+    box-sizing: border-box;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 16px solid transparent;
+    border-top-color: #2bffff;
+    bottom: 0;
+    left: 0;
 }
 
 table {
