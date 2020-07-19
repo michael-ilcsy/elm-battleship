@@ -1,20 +1,38 @@
 module Main exposing (..)
 
+import Array exposing (Array)
 import Browser
-import Html exposing (Html, text, div, h1, img)
-import Html.Attributes exposing (src)
+import Html exposing (Html, div, table, tbody, td, tr)
+
 
 
 ---- MODEL ----
 
 
 type alias Model =
-    {}
+    { gameBoard : GameBoard }
+
+
+type alias GameBoard =
+    Array (Array GameBoardState)
+
+
+type GameBoardState
+    = Unknown
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( { gameBoard = initGameBoard }, Cmd.none )
+
+
+gameBoardSize =
+    10
+
+
+initGameBoard : GameBoard
+initGameBoard =
+    Array.repeat gameBoardSize <| Array.repeat gameBoardSize Unknown
 
 
 
@@ -37,8 +55,27 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ img [ src "/logo.svg" ] []
-        , h1 [] [ text "Your Elm App is working!" ]
+        [ viewGameBoard model.gameBoard
+        ]
+
+
+viewGameBoard : GameBoard -> Html msg
+viewGameBoard gameBoard =
+    table []
+        [ tbody []
+            (Array.map
+                (\row ->
+                    tr [] <|
+                        Array.toList <|
+                            Array.map
+                                (\square ->
+                                    td [] []
+                                )
+                                row
+                )
+                gameBoard
+                |> Array.toList
+            )
         ]
 
 
