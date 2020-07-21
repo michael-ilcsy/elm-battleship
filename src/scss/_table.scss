@@ -1,0 +1,54 @@
+$tableSquareColor: #2bffff;
+
+@mixin sunkTip {
+  background-color: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 16px solid transparent;
+  bottom: 0;
+  left: 0;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+
+td {
+  border: 2px solid gray;
+  width: 30px;
+  height: 30px;
+  position: relative;
+
+  &.sunk {
+    background-color: $tableSquareColor;
+
+    &.right, &.left, &.up, &.down {
+      background-color: transparent
+    }
+
+    &.right > div {
+      @include sunkTip;
+      border-left-color: $tableSquareColor;
+    }
+
+    &.left > div {
+      @include sunkTip;
+      border-right-color: $tableSquareColor;
+    }
+
+    &.up > div {
+      @include sunkTip;
+      border-bottom-color: $tableSquareColor;
+    }
+
+    &.down > div {
+      @include sunkTip;
+      border-top-color: $tableSquareColor;
+    }
+  }
+}
+
