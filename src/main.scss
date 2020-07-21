@@ -1,0 +1,87 @@
+/*
+  elm-hot creates an additional div wrapper around the app to make HMR possible.
+  This could break styling in development mode if you are using Elm UI.
+
+  More context in the issue:
+    https://github.com/halfzebra/create-elm-app/issues/320
+*/
+[data-elm-hot="true"] {
+  height: inherit;
+}
+
+body {
+  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  text-align: center;
+  color: #293c4b;
+}
+
+td {
+  border: 2px solid gray;
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+td.sunk {
+  background-color: #2bffff;
+}
+
+td.sunk.right, td.sunk.left, td.sunk.up, td.sunk.down {
+  background-color: transparent
+}
+
+td.sunk.right > div {
+  background-color: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 16px solid transparent;
+  border-left-color: #2bffff;
+  bottom: 0;
+  left: 0;
+}
+
+td.sunk.left > div {
+  background-color: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 16px solid transparent;
+  border-right-color: #2bffff;
+  bottom: 0;
+  left: 0;
+}
+
+td.sunk.up > div {
+  background-color: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 16px solid transparent;
+  border-bottom-color: #2bffff;
+  bottom: 0;
+  left: 0;
+}
+
+td.sunk.down > div {
+  background-color: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 16px solid transparent;
+  border-top-color: #2bffff;
+  bottom: 0;
+  left: 0;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+

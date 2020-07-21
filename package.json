@@ -1,12 +1,18 @@
 {
   "scripts": {
-    "start": "elm-app start",
+    "start": "run-p start:elm watch:sass",
+    "start:elm": "elm-app start",
     "install:elm": "elm-app install",
-    "build": "elm-app build",
+    "build": "run-s build:sass build:elm",
+    "build:elm": "elm-app build",
+    "build:sass": "sass ./src:./src",
+    "watch:sass": "yarn build:sass --watch",
     "test": "elm-app test",
     "test:watch": "elm-app test --watch"
   },
   "dependencies": {
-    "create-elm-app": "^4.2.26"
+    "create-elm-app": "^4.2.26",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.26.10"
   }
 }
