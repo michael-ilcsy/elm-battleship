@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, div, table, tbody, td, tr)
+import Html exposing (Html, div, i, table, tbody, td, tr)
 import Html.Attributes exposing (class)
 
 
@@ -21,6 +21,7 @@ type alias GameBoard =
 type GameBoardState
     = Unknown
     | Sunk SunkType
+    | Miss
 
 
 type SunkType
@@ -139,19 +140,18 @@ viewGameBoard gameBoard =
 
 viewSquare : GameBoardState -> Html msg
 viewSquare state =
-    td
-        [ class <|
-            case state of
-                Sunk Body ->
-                    "sunk"
+    case state of
+        Sunk Body ->
+            td [ class "sunk" ] []
 
-                Sunk (Tip direction) ->
-                    "sunk " ++ directionToString direction
+        Sunk (Tip direction) ->
+            td [ class <| "sunk " ++ directionToString direction ] [ div [] [] ]
 
-                _ ->
-                    ""
-        ]
-        [ div [] [] ]
+        Miss ->
+            td [] [ i [ class "fas fa-times" ] [] ]
+
+        _ ->
+            td [] []
 
 
 
