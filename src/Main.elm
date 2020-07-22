@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, div, i, table, tbody, td, tr)
+import Html exposing (Html, div, i, table, tbody, td, text, tr)
 import Html.Attributes exposing (class)
 
 
@@ -21,6 +21,7 @@ type alias GameBoard =
 type GameBoardState
     = Unknown
     | Sunk SunkType
+    | Hit ShipType
     | Miss
 
 
@@ -76,6 +77,29 @@ type Destroyer
 
 type Submarine
     = Submarine Coordinate ShipTip
+
+
+type ShipType
+    = B
+    | C
+    | D
+    | S
+
+
+shipTypeToString : ShipType -> String
+shipTypeToString shipType =
+    case shipType of
+        B ->
+            "B"
+
+        C ->
+            "C"
+
+        D ->
+            "D"
+
+        S ->
+            "S"
 
 
 type ShipData
@@ -149,6 +173,9 @@ viewSquare state =
 
         Miss ->
             td [] [ i [ class "fas fa-times" ] [] ]
+
+        Hit shipType ->
+            td [ class "hit" ] [ text <| shipTypeToString shipType ]
 
         _ ->
             td [] []
