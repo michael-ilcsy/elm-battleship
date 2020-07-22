@@ -20,7 +20,7 @@ type alias GameBoard =
 
 type GameBoardState
     = Unknown
-    | Sunk SunkType
+    | Sunk ShipType SunkType
     | Hit ShipType
     | Miss
 
@@ -165,11 +165,12 @@ viewGameBoard gameBoard =
 viewSquare : GameBoardState -> Html msg
 viewSquare state =
     case state of
-        Sunk Body ->
-            td [ class "sunk" ] []
+        Sunk shipType Body ->
+            td [ class "sunk" ] [ text <| shipTypeToString shipType ]
 
-        Sunk (Tip direction) ->
-            td [ class <| "sunk " ++ directionToString direction ] [ div [] [] ]
+        Sunk shipType (Tip direction) ->
+            td [ class <| "sunk " ++ directionToString direction ]
+                [ div [] [ text <| shipTypeToString shipType ] ]
 
         Miss ->
             td [] [ i [ class "fas fa-times" ] [] ]
