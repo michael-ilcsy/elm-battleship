@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Array exposing (Array)
 import Browser
-import Html exposing (Html, div, i, table, tbody, td, text, tr, span)
+import Html exposing (Html, div, i, span, table, tbody, td, text, tr)
 import Html.Attributes exposing (class)
 
 
@@ -170,9 +170,9 @@ viewSquare state =
 
         Sunk shipType (Tip direction) ->
             td [ class <| "sunk " ++ directionToString direction ]
-                [ 
-                    div [] [], -- 図形表示用DOM
-                    span [] [text <| shipTypeToString shipType]
+                [ div [] []
+                , -- 図形表示用DOM
+                  span [] [ text <| shipTypeToString shipType ]
                 ]
 
         Miss ->
